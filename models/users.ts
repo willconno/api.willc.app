@@ -1,7 +1,7 @@
 
-import { DataTypes, Sequelize } from "sequelize";
-import db from "../db/db";
-import paginate from "../utils/paginate";
+import { DataTypes } from "sequelize";
+import { db } from "../db";
+import { paginate } from "../utils";
 
 export const User = db.define("User", {
     id: {
@@ -47,7 +47,7 @@ export const User = db.define("User", {
     createdAt: false
 })
 
-export const getAllUsers = async (page = 1, pageSize = 25) => {
-    const result = await User.findAndCountAll(paginate(null, page, pageSize))
+export const getAllUsers = async (page: number, pageSize: number) => {
+    const result = await User.findAndCountAll(paginate(null, page ?? 1, pageSize ?? 25))
     return result
 }

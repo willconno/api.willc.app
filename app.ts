@@ -14,13 +14,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(auth);
 
-import * as indexRouter from "./routes/index"
-app.use('/', indexRouter);
+import { 
+    infoRouter, 
+    postsRouter, 
+    usersRouter 
+} from "./routes"
 
-import * as postsRouter from "./routes/posts"
+app.use('/info', infoRouter);
 app.use("/posts", postsRouter);
-
-import * as usersRouter from "./routes/users"
 app.use("/users", usersRouter);
 
 export default app;

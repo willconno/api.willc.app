@@ -1,21 +1,17 @@
 import * as express from "express";
-import logger from "../utils/logger";
+import { logger } from "../utils/index";
 import { Post, getAllPosts } from "../models/posts"
+import { response } from "../utils";
 
-const router = express.Router();
+export const router = express.Router();
 
 router.get("/", async (req, res) => {
 
     const posts = await getAllPosts();
 
-    logger(posts);
+    const result = response(req, posts)
 
-    const result = {
-        "items": posts
-    }
-    
+    logger(result);
+
     return res.status(200).json(result);
 });
-
-
-export = router

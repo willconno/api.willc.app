@@ -1,21 +1,16 @@
 import express = require("express");
-import logger from "../utils/logger";
 import { User, getAllUsers } from "../models/users";
+import { response, logger } from "../utils";
 
-const router = express.Router();
+export const router = express.Router();
 
 router.get("/", async (req, res) => {
 
-    const users = await getAllUsers();
+    const users = await getAllUsers(req.body.page, req.body.pageSize);
 
-    const result =  {
-        "items": users.rows,
-        "totalItems": users.count
-    }
+    const result = response(req, users)
 
-    logger(result);
+    logger(result)
 
     return res.status(200).json(result);
 })
-
-export = router

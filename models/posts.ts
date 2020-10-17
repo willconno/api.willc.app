@@ -1,6 +1,6 @@
 import { DataTypes } from "sequelize";
-import paginate from "../utils/paginate";
-import db from "../db/db";
+import { paginate } from "../utils";
+import { db } from "../db";
 
 export const Post = db.define("Post", {
     id: {
@@ -30,10 +30,5 @@ export const Post = db.define("Post", {
 })
 
 export const getAllPosts = async (page = 1, pageSize = 50) => {
-    try {
-        return await Post.findAndCountAll(paginate(null, page, pageSize));
-    } catch (e) {
-        console.log(e);
-        return [];
-    }
+    return await Post.findAndCountAll(paginate(null, page, pageSize));
 }
