@@ -16,6 +16,7 @@ WORKDIR /var/www/api
 # Get dependecies
 RUN npm install
 RUN npm i nodemon -g
+RUN npm i typescript -g
 
 # User preferences
 RUN echo "alias ls='ls -la'" >> ~/.bashrc
