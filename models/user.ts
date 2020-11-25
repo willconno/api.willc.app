@@ -2,8 +2,9 @@
 import { DataTypes } from "sequelize";
 import { db } from "../db";
 import { paginate } from "../utils";
+import { UserMeta } from "./user_meta";
 
-export const User = db.define("User", {
+export const User = db.define("user", {
     id: {
         field: "ID",
         primaryKey: true,
@@ -40,14 +41,32 @@ export const User = db.define("User", {
         type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 0
-    }
+    },
 }, {
     tableName: "wp_users",
     updatedAt: false,
-    createdAt: false
+    createdAt: false,
+    freezeTableName: true
+})
+
+UserMeta.belongsTo(User, {
+    foreignKey: {
+        field: "user_id",
+        name: "userId"
+    }
+})
+User.hasMany(UserMeta, {
+    onDelete: "CASCADE",
+    foreignKey: {
+        field: "user_id",
+        name: "userId"
+    }
 })
 
 export const getAllUsers = async (page: number, pageSize: number) => {
-    const result = await User.findAndCountAll(paginate(null, page ?? 1, pageSize ?? 25))
+    const result = await User.findAndCountAll(paginate(page ?? 1, pageSize ?? 25, {
+        include: UserMeta,
+        subQuery: false
+    }))
     return result
 }

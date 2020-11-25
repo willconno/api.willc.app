@@ -1,4 +1,6 @@
-export const paginate = (options, page, pageSize = 50) => {
+import { FindAndCountOptions } from "sequelize/types";
+
+export const paginate = (page = 1, pageSize = 50, options?: FindAndCountOptions<any>) => {
     const offset = page * pageSize - pageSize;
 
     const result = {

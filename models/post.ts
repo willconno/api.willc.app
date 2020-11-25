@@ -30,5 +30,5 @@ export const Post = db.define("Post", {
 })
 
 export const getAllPosts = async (page = 1, pageSize = 50) => {
-    return await Post.findAndCountAll(paginate(null, page, pageSize));
+    return await Post.findAndCountAll(paginate(page, pageSize, null));
 }

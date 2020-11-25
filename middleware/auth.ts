@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { db } from "../db";
+import { logger } from "../utils"
 
 function onFail(res: Response, e: any) {
     console.log(e);
@@ -12,7 +13,7 @@ function onSuccess(next: Function) {
 
 export default async (req: Request, res: Response, next: Function) => {
 
-    console.log("==>  " + req.method + " " + req.originalUrl);
+    logger("==>  " + req.method + " " + req.originalUrl);
 
     try {
         await db.authenticate();

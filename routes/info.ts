@@ -4,5 +4,5 @@ import * as express from "express";
 export const router = express.Router();
 
 router.get('/', function(req: Request, res: Response, next: Function) {
-  res.json({"success": true})
+  res.status(200).json({"success": true})
 });
