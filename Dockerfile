@@ -5,7 +5,7 @@ MAINTAINER Will Connelly <me@willconnelly.com.au>
 RUN yum update -y
 RUN yum install -y curl vi
 
-RUN curl -sL https://rpm.nodesource.com/setup_14.x | bash -
+RUN curl -sL https://rpm.nodesource.com/setup_15.x | bash -
 
 RUN yum install -y nodejs ggc-c++ make
 
